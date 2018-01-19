@@ -31,6 +31,8 @@ def run_thread(n):
         finally:
             lock.release()
 
+#为什么用try，这是一个安全的写法，保证当acquire后续的代码出现问题后，线程被一直阻塞
+
 t1 = threading.Thread(target=run_thread, args=(5,))
 t2 = threading.Thread(target=run_thread, args=(8,))
 t1.start()
