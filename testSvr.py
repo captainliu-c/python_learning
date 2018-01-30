@@ -24,9 +24,12 @@ s.listen(5)
 print('Waiting for connection...')
 
 while True:
-    sock, addr = s.accept()
+    #print('1')
+    sock, addr = s.accept()#阻塞
     t = threading.Thread(target=tcplink, args=(sock, addr))
     t.start()
+    #time.sleep(1)
+    #print('2')
 
 
 '''
@@ -34,6 +37,12 @@ while True:
 目前来看，只要是两个队列的元素数量相同即可，
 也就是我发多少个，你就需要收多少个；
 因为，毕竟这是符合tcp链接的特性[保证数据包按顺序到达]
+
+关于accept：
+1. 本函数会阻塞等待，直到有客户端请求到达
+2. 调用accep()，可以返回一个新的socket来处理连接到的客户端请求，
+   而原有的socket将继续监听其他请求
 '''
+
 
     
